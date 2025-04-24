@@ -38,19 +38,24 @@ pip install -r requirements.txt
    - Set the Authorization Callback Domain to `localhost`
    - Note down your Client ID and Client Secret
 
-2. Create a `.env` file in the project root with the following variables:
-```
-STRAVA_CLIENT_ID=your_client_id
-STRAVA_CLIENT_SECRET=your_client_secret
-STRAVA_REFRESH_TOKEN=your_refresh_token
-```
+2. Set up your environment variables:
+   ```bash
+   # Copy the sample environment file
+   cp sample.env .env
+   
+   # Edit the .env file with your credentials
+   nano .env  # or use your preferred text editor
+   ```
+   - Replace `your_client_id_here` with your Strava Client ID
+   - Replace `your_client_secret_here` with your Strava Client Secret
 
 3. Run the authentication helper:
 ```bash
 python auth_helper.py
 ```
    - This will open a web browser for Strava authentication
-   - After authenticating, copy the refresh token to your `.env` file
+   - After authenticating, enter the code from the URL
+   - The script will automatically update your .env file with the refresh token
 
 ## Usage
 
@@ -116,7 +121,7 @@ The HTML report provides an interactive view of your chains with:
 ### Authentication Issues
 1. **Invalid Refresh Token**
    - Run `auth_helper.py` again to get a new refresh token
-   - Update your `.env` file with the new token
+   - The script will automatically update your .env file
 
 2. **API Rate Limits**
    - The script automatically handles rate limits
@@ -137,8 +142,9 @@ The HTML report provides an interactive view of your chains with:
 ### Project Structure
 ```
 ChainChecker/
-├── .env                    # Environment variables
-├── auth_helper.py          # Authentication helper
+├── .env                    # Environment variables (not in git)
+├── sample.env             # Template for environment variables
+├── auth_helper.py         # Authentication helper
 ├── strava_chain_tracker.py # Main chain tracking logic
 ├── strava_chains_report.md # Generated report
 └── strava_chains_website.html # HTML report
